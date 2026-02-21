@@ -8,16 +8,61 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="/styles.css?v=3.4">
+  <link rel="stylesheet" href="/styles.css?v=3.5">
   <meta property="og:title" content="Don't Trust. Verify. — Phoenix Platform">
-  <meta property="og:description" content="Independently verify any Phoenix Quantum Attestation. Dual PQC signature verification with ML-DSA and SLH-DSA.">
+  <meta property="og:description" content="Independently verify any Phoenix Quantum Attestation.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://phoenixrise.io">
+  <meta property="og:url" content="https://phoenixrise.io/verify.html">
   <meta property="og:site_name" content="Phoenix Platform">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Don't Trust. Verify. — Phoenix Platform">
-  <meta name="twitter:description" content="Independently verify any Phoenix Quantum Attestation. Dual PQC signature verification with ML-DSA and SLH-DSA.">
-  
+  <style>
+    .verify-scenario{display:flex;gap:2rem;margin:2rem 0;flex-wrap:wrap}
+    .scenario-card{flex:1;min-width:240px;padding:1.5rem;border-radius:var(--radius);border:2px solid var(--border);background:var(--bg-card);cursor:pointer;transition:all .3s ease;position:relative}
+    .scenario-card:hover{border-color:var(--border-accent)}
+    .scenario-card.active{border-color:var(--accent);background:rgba(232,121,47,0.04)}
+    .scenario-card .sc-icon{font-size:1.8rem;margin-bottom:.75rem}
+    .scenario-card h4{font-size:1rem;margin-bottom:.4rem}
+    .scenario-card p{font-size:.82rem;color:var(--text-secondary);line-height:1.5}
+    .sc-badge{position:absolute;top:1rem;right:1rem;font-size:.65rem;font-weight:700;text-transform:uppercase;padding:.2rem .6rem;border-radius:20px;letter-spacing:.06em}
+    .sc-badge-demo{background:rgba(232,121,47,0.12);color:var(--accent)}
+    .demo-transaction{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1.75rem;margin:1.5rem 0}
+    .tx-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;margin-bottom:1.25rem}
+    .tx-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-muted);font-weight:600}
+    .tx-value{font-family:var(--font-mono);font-size:.82rem;color:var(--text-secondary)}
+    .tx-row{display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:.75rem}
+    .tx-field{flex:1;min-width:140px}
+    .tx-field-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:.25rem}
+    .tx-field-value{font-family:var(--font-mono);font-size:.85rem;color:var(--text-primary);word-break:break-all}
+    .tx-divider{border:none;border-top:1px solid var(--border);margin:1rem 0}
+    .verify-progress{margin:2rem 0}
+    .vp-step{display:flex;gap:1rem;padding:1rem 1.25rem;align-items:flex-start;border-left:2px solid var(--border);margin-left:.75rem;position:relative;opacity:.35;transition:all .4s ease}
+    .vp-step.active{opacity:1;border-left-color:var(--accent)}
+    .vp-step.pass{opacity:1;border-left-color:var(--green)}
+    .vp-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;margin-top:2px;background:var(--border);border:2px solid var(--bg-deep);transition:all .3s ease;position:relative;left:-1.6rem}
+    .vp-step.active .vp-dot{background:var(--accent);box-shadow:0 0 10px rgba(232,121,47,0.4)}
+    .vp-step.pass .vp-dot{background:var(--green);box-shadow:0 0 10px rgba(76,175,80,0.4)}
+    .vp-info{flex:1;margin-left:-.5rem}
+    .vp-title{font-weight:700;font-size:.9rem;margin-bottom:.2rem}
+    .vp-desc{font-size:.8rem;color:var(--text-secondary);line-height:1.5}
+    .vp-detail{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);margin-top:.35rem;word-break:break-all}
+    .vp-time{font-family:var(--font-mono);font-size:.7rem;color:var(--text-muted);margin-top:.25rem}
+    .vp-status{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-top:.3rem;display:none}
+    .vp-step.pass .vp-status{display:block;color:var(--green)}
+    .verify-verdict{padding:1.5rem 2rem;border-radius:var(--radius);margin-top:1.5rem;display:none;text-align:center}
+    .verdict-pass{background:rgba(76,175,80,0.08);border:1px solid rgba(76,175,80,0.3)}
+    .verdict-icon{font-size:2.5rem;margin-bottom:.5rem}
+    .verdict-title{font-size:1.25rem;font-weight:800;margin-bottom:.25rem;color:var(--green)}
+    .verdict-sub{font-size:.85rem;color:var(--text-secondary)}
+    .what-proves{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;margin-top:2rem}
+    .wp-card{padding:1.5rem;border-radius:var(--radius);border:1px solid var(--border);background:var(--bg-card);text-align:center}
+    .wp-icon{font-size:1.5rem;margin-bottom:.75rem}
+    .wp-card h4{font-size:.95rem;margin-bottom:.4rem;color:var(--text-primary)}
+    .wp-card p{font-size:.82rem;color:var(--text-secondary);line-height:1.5}
+    .custom-upload{margin-top:2rem}
+    .upload-area{border:2px dashed var(--border);border-radius:var(--radius);padding:2rem;text-align:center;cursor:pointer;transition:all .3s ease;background:var(--bg-card)}
+    .upload-area:hover{border-color:var(--accent);background:rgba(232,121,47,0.02)}
+    .upload-icon{font-size:2rem;margin-bottom:.5rem;opacity:.4}
+    @media(max-width:600px){.tx-row{flex-direction:column;gap:.5rem}.verify-scenario{flex-direction:column}}
+  </style>
 </head>
 <body>
   
@@ -31,7 +76,7 @@
       <button class="nav-toggle" onclick="this.classList.toggle('active');document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">☰</button>
       <div class="nav-links">
         <div class="nav-dropdown">
-          <span class="nav-link nav-dropdown-trigger ">Products</span>
+          <span class="nav-link nav-dropdown-trigger">Products</span>
           <div class="nav-dropdown-menu">
             <a href="/products/quantum-attestation.html"><div class="dropdown-icon di-accent"><svg class="icon" viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5.5-3.8 10.7-8 12-4.2-1.3-8-6.5-8-12V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div><span>Quantum Attestation <span class="dropdown-badge badge-new">NEW</span></span></a>
             <a href="/products/phoenix-sign.html"><div class="dropdown-icon di-blue"><svg class="icon" viewBox="0 0 24 24"><path d="M21 2l-2 2m-7.6 7.6a5.5 5.5 0 1 0-7.8 7.8 5.5 5.5 0 0 0 7.8-7.8zm0 0L15.3 8.7m0 0l3 3L21 9l-3-3m-2.7 2.7L18 6"/></svg></div><span>PhoenixSig</span></a>
@@ -40,49 +85,165 @@
           </div>
         </div>
         <div class="nav-dropdown">
-          <span class="nav-link nav-dropdown-trigger ">Solutions</span>
+          <span class="nav-link nav-dropdown-trigger">Solutions</span>
           <div class="nav-dropdown-menu">
             <a href="/solutions/bitcoin-custody.html"><svg class="icon" viewBox="0 0 24 24"><path d="M11.8 2v2.4M11.8 19.6V22M15.2 4.4H10c-1.1 0-2 .9-2 2v0c0 1.1.9 2 2 2h4.4c1.1 0 2 .9 2 2v0c0 1.1-.9 2-2 2H8M15.2 12.4H10c-1.1 0-2 .9-2 2v0c0 1.1.9 2 2 2h5.2c1.1 0 2 .9 2 2v0c0 1.1-.9 2-2 2H8"/></svg> Bitcoin Custody</a>
             <a href="/solutions/defi-security.html"><svg class="icon" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg> DeFi &amp; L2</a>
             <a href="/solutions/exchange-protection.html"><svg class="icon" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.7-4 3-9 3s-9-1.3-9-3"/><path d="M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5"/></svg> Exchanges</a>
             <a href="/solutions/stablecoin-cbdc.html"><svg class="icon" viewBox="0 0 24 24"><path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3"/></svg> Stablecoin &amp; CBDC</a>
-            <a href="/solutions/enterprise-signing.html"><svg class="icon" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg> Enterprise &amp; Government</a>
+            <a href="/solutions/enterprise-signing.html"><svg class="icon" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01"/></svg> Enterprise &amp; Government</a>
           </div>
         </div>
-        <a href="/technology.html" class="nav-link ">Technology</a>
-        <a href="/pricing.html" class="nav-link ">Pricing</a>
-        <a href="/blog/" class="nav-link ">Blog</a>
-        <a href="/about.html" class="nav-link ">About</a>
+        <a href="/technology.html" class="nav-link">Technology</a>
+        <a href="/pricing.html" class="nav-link">Pricing</a>
+        <a href="/blog/" class="nav-link">Blog</a>
+        <a href="/about.html" class="nav-link">About</a>
         <a href="/verify.html" class="nav-verify"><svg class="icon" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> Verify</a>
       </div>
     </div>
   </nav>
   
   <section class="page-hero">
-    <span class="section-label">Verification</span>
+    <span class="section-label">Independent Verification</span>
     <h1>Don't trust. <span class="highlight">Verify.</span></h1>
-    <p class="hero-sub">Every Phoenix Quantum Attestation can be independently verified. Paste attestation data below to check dual post-quantum signatures.</p>
+    <p class="hero-sub">Every Phoenix Quantum Attestation is independently verifiable. No Phoenix account needed. No trust required. Just cryptographic proof.</p>
   </section>
 
   <section class="section">
     <div class="container">
-      <div class="verify-box fade-up">
-        <h3 style="margin-bottom:1.5rem">Demo Attestation</h3>
-        <p class="text-secondary mb-4">This demo shows how verification works. In production, paste real attestation data.</p>
-        <button class="btn btn-primary" onclick="runDemo()" id="demoBtn"><svg class="icon" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> Run Demo Verification</button>
-        <div id="demoResults" style="margin-top:1.5rem;display:none">
-          <div class="verify-result pass"><span class="vr-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span> <strong>ML-DSA-65</strong>&nbsp; Signature valid — lattice-based</div>
-          <div class="verify-result pass"><span class="vr-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span> <strong>SLH-DSA-128s</strong>&nbsp; Signature valid — hash-based</div>
-          <div class="verify-result pass"><span class="vr-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span> <strong>Merkle Proof</strong>&nbsp; Epoch key authenticated against root</div>
-          <div class="verify-result pass"><span class="vr-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span> <strong>Epoch #1847</strong>&nbsp; Key within valid epoch range</div>
-          <div class="verify-result pass"><span class="vr-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span> <strong>Timestamp</strong>&nbsp; Signed at 2026-02-21 — within policy window</div>
+      <div class="section-header fade-up">
+        <span class="section-label">Live Demo</span>
+        <h2>Pick a scenario</h2>
+        <p class="text-secondary" style="max-width:600px;margin:0 auto">Choose a sample transaction to see how verification works step by step.</p>
+      </div>
+
+      <div class="verify-scenario fade-up">
+        <div class="scenario-card active" onclick="selectScenario(0)">
+          <span class="sc-badge sc-badge-demo">Demo</span>
+          <div class="sc-icon">₿</div>
+          <h4>Bitcoin Withdrawal</h4>
+          <p>2.5 BTC from institutional custody. FROST 3-of-5 threshold signing with DualSign attestation.</p>
+        </div>
+        <div class="scenario-card" onclick="selectScenario(1)">
+          <span class="sc-badge sc-badge-demo">Demo</span>
+          <div class="sc-icon">⟠</div>
+          <h4>ETH Key Rotation</h4>
+          <p>Admin key rotation on a DeFi protocol. CGGMP21 2-of-3 with quantum attestation.</p>
+        </div>
+        <div class="scenario-card" onclick="selectScenario(2)">
+          <span class="sc-badge sc-badge-demo">Demo</span>
+          <div class="sc-icon">🏛</div>
+          <h4>Stablecoin Mint</h4>
+          <p>$10M USDC mint authorization. Multi-party approval with dual PQC attestation.</p>
         </div>
       </div>
 
-      <div class="verify-box fade-up" style="margin-top:2rem">
-        <h3 style="margin-bottom:1.5rem">Verify Custom Attestation</h3>
-        <textarea class="verify-textarea" placeholder='{"attestation": {"ml_dsa": {"signature": "...", "public_key": "..."}, "slh_dsa": {"signature": "...", "public_key": "..."}, "merkle_proof": {...}, "epoch": 1847, "timestamp": "..."}, "payload": "..."}'></textarea>
-        <button class="btn btn-secondary mt-2"><svg class="icon" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> Verify Attestation</button>
+      <div class="demo-transaction fade-up" id="txBox">
+        <div class="tx-header">
+          <div>
+            <div class="tx-label">Transaction</div>
+            <div style="font-weight:700;font-size:1.1rem" id="txTitle">Bitcoin Withdrawal — 2.5 BTC</div>
+          </div>
+          <div style="text-align:right">
+            <div class="tx-label">Attestation ID</div>
+            <div class="tx-value" id="txId">phx-att-7f3a9b2c-1847</div>
+          </div>
+        </div>
+        <hr class="tx-divider">
+        <div class="tx-row">
+          <div class="tx-field"><div class="tx-field-label">Epoch</div><div class="tx-field-value" id="txEpoch">#1847</div></div>
+          <div class="tx-field"><div class="tx-field-label">Timestamp</div><div class="tx-field-value" id="txTime">2026-02-21T14:32:07Z</div></div>
+          <div class="tx-field"><div class="tx-field-label">Signing Method</div><div class="tx-field-value" id="txMethod">FROST 3-of-5</div></div>
+        </div>
+        <div class="tx-row">
+          <div class="tx-field"><div class="tx-field-label">Algorithm 1</div><div class="tx-field-value">ML-DSA-65 (FIPS 204)</div></div>
+          <div class="tx-field"><div class="tx-field-label">Algorithm 2</div><div class="tx-field-value">SLH-DSA-SHAKE-128f (FIPS 205)</div></div>
+        </div>
+        <div class="tx-row">
+          <div class="tx-field" style="flex:2"><div class="tx-field-label">Payload Hash (SHA3-256)</div><div class="tx-field-value" id="txHash" style="font-size:.75rem">a4f8c2e1b7d953a6f0e2c4b8d1a7f3e5c9b2d6a8f4e1c7b3d5a9f2e8c4b6d0a1</div></div>
+        </div>
+      </div>
+
+      <div class="fade-up" style="text-align:center;margin:1.5rem 0">
+        <button class="btn btn-primary btn-lg" id="verifyBtn" onclick="runVerification()">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5.5-3.8 10.7-8 12-4.2-1.3-8-6.5-8-12V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+          Verify This Attestation
+        </button>
+      </div>
+
+      <div class="verify-progress fade-up" id="verifyProgress" style="display:none">
+        <div class="vp-step" id="vs0"><div class="vp-dot"></div><div class="vp-info">
+          <div class="vp-title">Lattice-Based Signature (ML-DSA-65)</div>
+          <div class="vp-desc">Verifying NIST FIPS 204 lattice-based signature against epoch public key</div>
+          <div class="vp-detail" id="vd0"></div><div class="vp-time" id="vt0"></div><div class="vp-status" id="vst0">✓ VALID</div>
+        </div></div>
+        <div class="vp-step" id="vs1"><div class="vp-dot"></div><div class="vp-info">
+          <div class="vp-title">Hash-Based Signature (SLH-DSA-128f)</div>
+          <div class="vp-desc">Independently verifying NIST FIPS 205 hash-based signature</div>
+          <div class="vp-detail" id="vd1"></div><div class="vp-time" id="vt1"></div><div class="vp-status" id="vst1">✓ VALID</div>
+        </div></div>
+        <div class="vp-step" id="vs2"><div class="vp-dot"></div><div class="vp-info">
+          <div class="vp-title">Merkle Key Commitment</div>
+          <div class="vp-desc">Authenticating epoch public key against committed Merkle root</div>
+          <div class="vp-detail" id="vd2"></div><div class="vp-time" id="vt2"></div><div class="vp-status" id="vst2">✓ AUTHENTICATED</div>
+        </div></div>
+        <div class="vp-step" id="vs3"><div class="vp-dot"></div><div class="vp-info">
+          <div class="vp-title">Epoch Validity</div>
+          <div class="vp-desc">Confirming epoch key is within rotation window and not revoked</div>
+          <div class="vp-detail" id="vd3"></div><div class="vp-time" id="vt3"></div><div class="vp-status" id="vst3">✓ CURRENT</div>
+        </div></div>
+        <div class="vp-step" id="vs4"><div class="vp-dot"></div><div class="vp-info">
+          <div class="vp-title">DualSign Consensus</div>
+          <div class="vp-desc">Both algorithms independently confirm the same payload</div>
+          <div class="vp-detail" id="vd4"></div><div class="vp-time" id="vt4"></div><div class="vp-status" id="vst4">✓ CONSENSUS REACHED</div>
+        </div></div>
+      </div>
+
+      <div class="verify-verdict verdict-pass" id="verdictPass">
+        <div class="verdict-icon">🛡️</div>
+        <div class="verdict-title">Attestation Verified</div>
+        <div class="verdict-sub">All 5 checks passed. This transaction is protected by dual post-quantum signatures with valid epoch key commitment.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:linear-gradient(180deg,transparent,rgba(46,117,182,0.015),transparent)">
+    <div class="container max-w-850 mx-auto">
+      <div class="section-header fade-up">
+        <span class="section-label">Production</span>
+        <h2>Verify your own attestation</h2>
+        <p class="text-secondary" style="max-width:550px;margin:0 auto">Paste attestation data from any Phoenix-protected operation. Verification runs client-side — your data never leaves your browser.</p>
+      </div>
+      <div class="custom-upload fade-up">
+        <div class="upload-area" onclick="showCustomInput()">
+          <div class="upload-icon">📋</div>
+          <p style="margin-bottom:.75rem;font-weight:600">Paste attestation JSON</p>
+          <p class="text-secondary" style="font-size:.82rem">From Phoenix API response or attestation receipt</p>
+        </div>
+        <textarea id="customInput" class="verify-textarea" style="margin-top:1rem;display:none;min-height:200px" placeholder="Paste your attestation JSON here..."></textarea>
+        <div style="margin-top:1rem;display:flex;gap:1rem;flex-wrap:wrap">
+          <button class="btn btn-secondary" onclick="showCustomInput()">
+            <svg class="icon" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Paste from clipboard
+          </button>
+          <button class="btn btn-ghost" onclick="loadSampleJSON()">Load sample format</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="section-label">What Verification Proves</span>
+        <h2>Five guarantees, zero trust</h2>
+      </div>
+      <div class="what-proves fade-up">
+        <div class="wp-card"><div class="wp-icon">🔐</div><h4>Quantum-Safe</h4><p>Two independent NIST algorithms protect the signature. If one is ever broken, the other still holds.</p></div>
+        <div class="wp-card"><div class="wp-icon">🔑</div><h4>No Permanent Keys</h4><p>The signing key existed only for this epoch. It cannot be reused, stolen, or replayed.</p></div>
+        <div class="wp-card"><div class="wp-icon">🌳</div><h4>Key Authenticity</h4><p>Merkle proof confirms this epoch key was committed before signing. The root is public and immutable.</p></div>
+        <div class="wp-card"><div class="wp-icon">⏱️</div><h4>Time-Bound</h4><p>Valid only within its epoch window. Expired or premature signatures are rejected.</p></div>
+        <div class="wp-card"><div class="wp-icon">🔄</div><h4>Self-Healing</h4><p>Even if the device was compromised before this epoch, PCS ensures fresh, uncompromised key material.</p></div>
       </div>
     </div>
   </section>
@@ -90,53 +251,70 @@
   <section class="section" style="background:linear-gradient(180deg,transparent,rgba(232,121,47,0.015),transparent)">
     <div class="container max-w-850 mx-auto">
       <div class="section-header fade-up">
-        <span class="section-label">How it works</span>
-        <h2>Five-step verification</h2>
+        <span class="section-label">For Developers</span>
+        <h2>Verify programmatically</h2>
       </div>
-      <div class="fade-up">
-        <div class="feature-block"><h4>1. ML-DSA Signature Check</h4><p>Verify the ML-DSA (FIPS 204) lattice-based signature against the epoch public key and original payload.</p></div>
-        <div class="feature-block"><h4>2. SLH-DSA Signature Check</h4><p>Independently verify the SLH-DSA (FIPS 205) hash-based signature. Both algorithms must pass.</p></div>
-        <div class="feature-block"><h4>3. Merkle Proof Validation</h4><p>Confirm the epoch public key is authentically committed in the Merkle tree using the provided authentication path.</p></div>
-        <div class="feature-block"><h4>4. Epoch Authentication</h4><p>Verify that the signing epoch is within the valid range and matches the expected key rotation schedule.</p></div>
-        <div class="feature-block"><h4>5. Timestamp Policy</h4><p>Confirm the attestation timestamp falls within the acceptable policy window for the transaction.</p></div>
+      <div class="fade-up" style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;overflow-x:auto">
+        <pre style="margin:0;color:var(--text-secondary);font-size:.82rem;line-height:1.7"><code><span style="color:var(--text-muted)"># Verify via Phoenix API — no auth required</span>
+curl -X POST https://api.phoenixrise.io/v1/verify \
+  -H "Content-Type: application/json" \
+  -d @attestation.json
+
+<span style="color:var(--text-muted)"># Response</span>
+{
+  "verified": true,
+  "checks": {
+    "ml_dsa":       {"status": "pass", "algorithm": "ML-DSA-65"},
+    "slh_dsa":      {"status": "pass", "algorithm": "SLH-DSA-SHAKE-128f"},
+    "merkle_proof": {"status": "pass", "root": "0xa4f8...d0a1"},
+    "epoch":        {"status": "pass", "number": 1847, "valid_range": [1840, 1860]},
+    "dualsign":     {"status": "pass", "consensus": true}
+  },
+  "attestation_id": "phx-att-7f3a9b2c-1847",
+  "verified_at": "2026-02-21T14:32:09Z"
+}</code></pre>
       </div>
+      <p class="text-secondary fade-up" style="margin-top:1rem;font-size:.85rem;text-align:center">Free verification endpoint, rate-limited. No authentication required. <a href="mailto:contact@phoenixrise.io" style="color:var(--accent)">Contact us</a> for higher limits.</p>
     </div>
   </section>
 
-  
   <section class="cta-section">
     <div class="container">
       <h2 class="fade-up">Ready to attest?</h2>
-      <p class="fade-up">Start with a free 30-day pilot. Quantum-proof verification for every transaction.</p>
+      <p class="fade-up">Start with a free 30-day pilot. Quantum-proof attestation for every transaction.</p>
       <div class="cta-buttons fade-up">
         <a href="mailto:contact@phoenixrise.io?subject=Pilot%20Request" class="btn btn-primary btn-lg">Start Free Pilot →</a>
-        <a href="/contact.html" class="btn btn-secondary btn-lg">Talk to Sales →</a>
+        <a href="/products/quantum-attestation.html" class="btn btn-secondary btn-lg">How Attestation Works →</a>
       </div>
     </div>
   </section>
 
   <script>
-    function runDemo() {
-      document.getElementById('demoBtn').disabled = true;
-      document.getElementById('demoBtn').textContent = 'Verifying...';
-      document.getElementById('demoResults').style.display = 'block';
-      setTimeout(() => {
-        document.getElementById('demoBtn').textContent = '✓ Verification Complete';
-        document.getElementById('demoBtn').style.background = 'var(--green)';
-      }, 2000);
-    }
+    const scenarios=[
+      {title:'Bitcoin Withdrawal — 2.5 BTC',id:'phx-att-7f3a9b2c-1847',epoch:'#1847',time:'2026-02-21T14:32:07Z',method:'FROST 3-of-5',hash:'a4f8c2e1b7d953a6f0e2c4b8d1a7f3e5c9b2d6a8f4e1c7b3d5a9f2e8c4b6d0a1',
+        details:['pk: 0x7a3f...c2d1 | sig: 2420 bytes | param: ML-DSA-65','pk: 0xb8e2...f4a7 | sig: 7856 bytes | param: SLH-DSA-SHAKE-128f','root: 0xa4f8...d0a1 | depth: 12 | leaf: 1847','epoch: 1847 | range: [1840, 1860] | rotated: 2026-02-21T14:00:00Z','ml_dsa: ✓ | slh_dsa: ✓ | payload_match: ✓']},
+      {title:'ETH Admin Key Rotation — DeFi Protocol',id:'phx-att-3e7b1d9a-2103',epoch:'#2103',time:'2026-02-21T09:15:42Z',method:'CGGMP21 2-of-3',hash:'c7e2a9f4b1d8c3e6a0f5b2d7c4e1a8f3b6d0c9e5a2f7b4d1c8e3a6f0b5d2c7e9',
+        details:['pk: 0x2c8f...a1b3 | sig: 2420 bytes | param: ML-DSA-65','pk: 0xd4a1...e7c9 | sig: 7856 bytes | param: SLH-DSA-SHAKE-128f','root: 0xc7e2...c7e9 | depth: 14 | leaf: 2103','epoch: 2103 | range: [2098, 2115] | rotated: 2026-02-21T09:00:00Z','ml_dsa: ✓ | slh_dsa: ✓ | payload_match: ✓']},
+      {title:'USDC Mint Authorization — $10,000,000',id:'phx-att-a1c4e8f2-0892',epoch:'#0892',time:'2026-02-21T11:48:33Z',method:'CGGMP21 3-of-5',hash:'f1a3b5c7d9e2f4a6b8c0d2e4f6a8b1c3d5e7f9a2b4c6d8e0f3a5b7c9d1e4f6a8',
+        details:['pk: 0x9e1a...b4d2 | sig: 2420 bytes | param: ML-DSA-65','pk: 0xf3c7...d8a5 | sig: 7856 bytes | param: SLH-DSA-SHAKE-128f','root: 0xf1a3...f6a8 | depth: 10 | leaf: 892','epoch: 892 | range: [888, 905] | rotated: 2026-02-21T11:30:00Z','ml_dsa: ✓ | slh_dsa: ✓ | payload_match: ✓']}
+    ];
+    let cur=0,busy=false;
+    function selectScenario(i){cur=i;document.querySelectorAll('.scenario-card').forEach((c,j)=>c.classList.toggle('active',j===i));const s=scenarios[i];document.getElementById('txTitle').textContent=s.title;document.getElementById('txId').textContent=s.id;document.getElementById('txEpoch').textContent=s.epoch;document.getElementById('txTime').textContent=s.time;document.getElementById('txMethod').textContent=s.method;document.getElementById('txHash').textContent=s.hash;resetV()}
+    function resetV(){busy=false;document.getElementById('verifyProgress').style.display='none';document.getElementById('verdictPass').style.display='none';const b=document.getElementById('verifyBtn');b.disabled=false;b.innerHTML='<svg class="icon" viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5.5-3.8 10.7-8 12-4.2-1.3-8-6.5-8-12V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg> Verify This Attestation';b.style.background='';for(let i=0;i<5;i++){document.getElementById('vs'+i).className='vp-step';document.getElementById('vd'+i).textContent='';document.getElementById('vt'+i).textContent=''}}
+    function runVerification(){if(busy)return;busy=true;const b=document.getElementById('verifyBtn');b.disabled=true;b.textContent='Verifying...';document.getElementById('verifyProgress').style.display='block';document.getElementById('verifyProgress').scrollIntoView({behavior:'smooth',block:'center'});const s=scenarios[cur],dl=[400,900,1500,2000,2500],tm=['12ms','47ms','8ms','2ms','1ms'];dl.forEach((d,i)=>{setTimeout(()=>{document.getElementById('vs'+i).className='vp-step active'},d-300);setTimeout(()=>{document.getElementById('vs'+i).className='vp-step pass';document.getElementById('vd'+i).textContent=s.details[i];document.getElementById('vt'+i).textContent='Verified in '+tm[i]},d)});setTimeout(()=>{document.getElementById('verdictPass').style.display='block';b.innerHTML='✓ All 5 Checks Passed';b.style.background='var(--green)';document.getElementById('verdictPass').scrollIntoView({behavior:'smooth',block:'center'})},3000)}
+    function showCustomInput(){const t=document.getElementById('customInput');t.style.display='block';t.focus();if(navigator.clipboard&&navigator.clipboard.readText){navigator.clipboard.readText().then(v=>{if(v.trim().startsWith('{'))t.value=v}).catch(()=>{})}}
+    function loadSampleJSON(){const t=document.getElementById('customInput');t.style.display='block';t.value=JSON.stringify({attestation_id:"phx-att-XXXXXXXX-EPOCH",payload_hash:"sha3_256_hex",signatures:{ml_dsa_65:{public_key:"base64...",signature:"base64..."},slh_dsa_128f:{public_key:"base64...",signature:"base64..."}},merkle_proof:{root:"hex...",path:["hex..."],leaf_index:0},epoch:{number:0,valid_from:"ISO8601",valid_until:"ISO8601"},timestamp:"ISO8601"},null,2)}
   </script>
-  
   
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-brand">
-        <div class="nav-logo" style="margin-bottom:0.5rem"><svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div class="nav-logo" style="margin-bottom:.5rem"><svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs><linearGradient id="pl" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#E8792F"/><stop offset="100%" stop-color="#F5A623"/></linearGradient></defs>
   <path d="M18 3C14 8 9 11 8 17c-1 5 2 9 6 11 .5-2.5 0-5 1.5-8 1 3 .5 6 2 9 1.5-3 1-6 1.5-8C21 24 20.5 27 21 29c4-2 7-6 6-11-1-6-5-9-9-15z" fill="url(#pl)"/>
   <path d="M18 8c-2 3.5-5 6-6 9-.5 2 .5 5 2 6.5.5-2 .5-4 1.5-6 .5 2 0 4 1.5 6.5 1-2.5.5-4.5 1-6.5 1 2 .5 4.5 1.5 6.5 1.5-1.5 2.5-4 2-6.5-1-3-3.5-6.5-3.5-10z" fill="rgba(255,255,255,0.2)"/>
 </svg> PHOENIX</div>
-        <p>Cryptographic infrastructure that survives compromise. Post-quantum signatures, self-healing keys, and the only MPC platform with Post-Compromise Security.</p>
+        <p>Cryptographic infrastructure that survives compromise.</p>
         <div class="footer-newsletter">
           <p>Stay updated on quantum security</p>
           <form class="newsletter-form" onsubmit="event.preventDefault();this.innerHTML='<p style=color:var(--green)>✓ Subscribed!</p>'">
@@ -145,23 +323,20 @@
           </form>
         </div>
       </div>
-      <div class="footer-col">
-        <h4>Products</h4>
+      <div class="footer-col"><h4>Products</h4>
         <a href="/products/quantum-attestation.html">Quantum Attestation</a>
         <a href="/products/phoenix-sign.html">PhoenixSig</a>
         <a href="/products/phoenix-chain.html">Phoenix Chain</a>
         <a href="/products/phoenix-cloud.html">Phoenix Cloud</a>
       </div>
-      <div class="footer-col">
-        <h4>Solutions</h4>
+      <div class="footer-col"><h4>Solutions</h4>
         <a href="/solutions/bitcoin-custody.html">Bitcoin Custody</a>
         <a href="/solutions/defi-security.html">DeFi &amp; L2</a>
         <a href="/solutions/exchange-protection.html">Exchanges</a>
         <a href="/solutions/stablecoin-cbdc.html">Stablecoin &amp; CBDC</a>
         <a href="/solutions/enterprise-signing.html">Enterprise</a>
       </div>
-      <div class="footer-col">
-        <h4>Company</h4>
+      <div class="footer-col"><h4>Company</h4>
         <a href="/about.html">About</a>
         <a href="/technology.html">Technology</a>
         <a href="/pricing.html">Pricing</a>
@@ -177,22 +352,9 @@
   </footer>
   
   <script>
-    // Nav scroll effect
     window.addEventListener('scroll',()=>{document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>40)});
-    // Scroll animations
-    const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible')}})},{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
+    const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible')}})},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
     document.querySelectorAll('.fade-up').forEach(el=>io.observe(el));
-    // FAQ
-    document.querySelectorAll('.faq-q').forEach(q=>{q.addEventListener('click',()=>q.parentElement.classList.toggle('open'))});
-    // Counter animation
-    document.querySelectorAll('[data-count]').forEach(el=>{
-      const io2=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){
-        const t=+el.dataset.count,d=el.dataset.duration||2000,s=performance.now();
-        const pre=el.dataset.pre||'',suf=el.dataset.suf||'';
-        (function anim(now){const p=Math.min((now-s)/d,1);el.textContent=pre+Math.floor(p*t)+suf;if(p<1)requestAnimationFrame(anim)})(s);
-        io2.disconnect()}})},{threshold:0.5});
-      io2.observe(el);
-    });
   </script>
 </body>
 </html>
