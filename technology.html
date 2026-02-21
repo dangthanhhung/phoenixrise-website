@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Technology — Deep Dive — Phoenix Platform</title>
+<meta name="description" content="PhoenixSig architecture: PQC signing engine, deterministic state evolution, and Post-Compromise Security through hardware-backed entropy injection.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="/styles.css">
+<meta property="og:title" content="Technology — Deep Dive — Phoenix Platform">
+<meta property="og:description" content="PhoenixSig architecture: PQC signing engine, deterministic state evolution, and Post-Compromise Security through hardware-backed entropy injection.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://phoenixrise.io">
+<meta property="og:site_name" content="Phoenix Platform">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Technology — Deep Dive — Phoenix Platform">
+<meta name="twitter:description" content="PhoenixSig architecture: PQC signing engine, deterministic state evolution, and Post-Compromise Security through hardware-backed entropy injection.">
+</head>
+<body>
+<nav class="nav" id="mainNav"><div class="nav-inner"><a href="/" class="nav-logo"><svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="pl" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#E8792F"/><stop offset="100%" stop-color="#F5A623"/></linearGradient></defs><path d="M18 3C14 8 9 11 8 17c-1 5 2 9 6 11 .5-2.5 0-5 1.5-8 1 3 .5 6 2 9 1.5-3 1-6 1.5-8C21 24 20.5 27 21 29c4-2 7-6 6-11-1-6-5-9-9-15z" fill="url(#pl)"/><path d="M18 8c-2 3.5-5 6-6 9-.5 2 .5 5 2 6.5.5-2 .5-4 1.5-6 .5 2 0 4 1.5 6.5 1-2.5.5-4.5 1-6.5 1 2 .5 4.5 1.5 6.5 1.5-1.5 2.5-4 2-6.5-1-3-3.5-6.5-3.5-10z" fill="rgba(255,255,255,0.2)"/></svg> PHOENIX</a><button class="nav-toggle" onclick="this.classList.toggle('active');document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">☰</button><div class="nav-links"><div class="nav-dropdown"><span class="nav-link nav-dropdown-trigger ">Products</span><div class="nav-dropdown-menu"><a href="/products/quantum-attestation.html"><div class="dropdown-icon di-accent"><svg class="icon" viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5.5-3.8 10.7-8 12-4.2-1.3-8-6.5-8-12V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div><span>Quantum Attestation <span class="dropdown-badge badge-new">NEW</span></span></a><a href="/products/phoenix-sign.html"><div class="dropdown-icon di-blue"><svg class="icon" viewBox="0 0 24 24"><path d="M21 2l-2 2m-7.6 7.6a5.5 5.5 0 1 0-7.8 7.8 5.5 5.5 0 0 0 7.8-7.8zm0 0L15.3 8.7m0 0l3 3L21 9l-3-3m-2.7 2.7L18 6"/></svg></div><span>PhoenixSig</span></a><a href="/products/phoenix-chain.html"><div class="dropdown-icon di-green"><svg class="icon" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.8 1.8"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.8-1.8"/></svg></div><span>Phoenix Chain <span class="dropdown-badge badge-ready">READY</span></span></a><a href="/products/phoenix-cloud.html"><div class="dropdown-icon di-blue"><svg class="icon" viewBox="0 0 24 24"><path d="M18 10h-1.3A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div><span>Phoenix Cloud <span class="dropdown-badge badge-soon">SOON</span></span></a></div></div><div class="nav-dropdown"><span class="nav-link nav-dropdown-trigger ">Solutions</span><div class="nav-dropdown-menu"><a href="/solutions/bitcoin-custody.html"><svg class="icon" viewBox="0 0 24 24"><path d="M11.8 2v2.4M11.8 19.6V22M15.2 4.4H10c-1.1 0-2 .9-2 2v0c0 1.1.9 2 2 2h4.4c1.1 0 2 .9 2 2v0c0 1.1-.9 2-2 2H8M15.2 12.4H10c-1.1 0-2 .9-2 2v0c0 1.1.9 2 2 2h5.2c1.1 0 2 .9 2 2v0c0 1.1-.9 2-2 2H8"/></svg> Bitcoin Custody</a><a href="/solutions/defi-security.html"><svg class="icon" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg> DeFi &amp; L2</a><a href="/solutions/exchange-protection.html"><svg class="icon" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.7-4 3-9 3s-9-1.3-9-3"/><path d="M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5"/></svg> Exchanges</a><a href="/solutions/stablecoin-cbdc.html"><svg class="icon" viewBox="0 0 24 24"><path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3"/></svg> Stablecoin &amp; CBDC</a><a href="/solutions/enterprise-signing.html"><svg class="icon" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01"/></svg> Enterprise &amp; Government</a></div></div><a href="/technology.html" class="nav-link ">Technology</a><a href="/pricing.html" class="nav-link ">Pricing</a><a href="/blog/" class="nav-link ">Blog</a><a href="/about.html" class="nav-link ">About</a><a href="/verify.html" class="nav-verify"><svg class="icon" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> Verify</a></div></div></nav>
+
+<section class="page-hero"><span class="section-label">Architecture</span><h1>Technology <span class="highlight">Deep Dive</span></h1><p class="hero-sub">PhoenixSig is not another PQC signature. It's a signing operating system — three mandatory layers of post-quantum algorithms, deterministic state evolution, and hardware-backed PCS that work together to survive breach.</p></section>
+
+<div class="trust-bar fade-up"><div class="trust-badge"><svg class="icon" viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5.5-3.8 10.7-8 12-4.2-1.3-8-6.5-8-12V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg> NIST FIPS 204 &amp; 205</div><div class="trust-badge"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Post-Quantum Cryptography</div><div class="trust-badge"><svg class="icon" viewBox="0 0 24 24"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.5 9a9 9 0 0 1 14.9-3.2L23 10M1 14l4.6 4.2A9 9 0 0 0 20.5 15"/></svg> Post-Compromise Security</div><div class="trust-badge"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.2 14.2 6 23 12 20 18 23 15.8 14.2"/></svg> Peer-Reviewed Research</div></div>
+
+<section class="section"><div class="container">
+  <div class="section-header fade-up"><span class="section-label">Foundation</span><h2>Three mandatory layers</h2><p>PhoenixSig treats every signature as a temporary state snapshot. Remove any layer, and the security model breaks.</p></div>
+
+  <div class="arch-diagram fade-up">
+    <svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <rect x="20" y="10" width="760" height="90" rx="12" fill="rgba(232,121,47,0.08)" stroke="rgba(232,121,47,0.3)" stroke-width="1.5"/>
+      <text x="50" y="45" fill="#E8792F" font-family="Outfit,sans-serif" font-weight="700" font-size="16">LAYER 3 — Phoenix Injection (PCS)</text>
+      <text x="50" y="72" fill="#A0B4C8" font-family="DM Sans,sans-serif" font-size="13">VaultKey (TEE) → HKDF refresh → Hardware entropy → Post-Compromise Security</text>
+      <rect x="20" y="115" width="760" height="90" rx="12" fill="rgba(46,117,182,0.06)" stroke="rgba(46,117,182,0.25)" stroke-width="1.5"/>
+      <text x="50" y="150" fill="#4A9BE8" font-family="Outfit,sans-serif" font-weight="700" font-size="16">LAYER 2 — DyLWE Deterministic Core</text>
+      <text x="50" y="177" fill="#A0B4C8" font-family="DM Sans,sans-serif" font-size="13">Module ring R_q → LWR rounding → Forward-only evolution → Epoch key derivation</text>
+      <rect x="20" y="220" width="760" height="90" rx="12" fill="rgba(46,204,113,0.05)" stroke="rgba(46,204,113,0.2)" stroke-width="1.5"/>
+      <text x="50" y="255" fill="#2ECC71" font-family="Outfit,sans-serif" font-weight="700" font-size="16">LAYER 1 — PQC Signing Engine</text>
+      <text x="50" y="282" fill="#A0B4C8" font-family="DM Sans,sans-serif" font-size="13">ML-DSA (FIPS 204) + SLH-DSA (FIPS 205) → DualSign → Merkle commitment</text>
+      <line x1="400" y1="100" x2="400" y2="115" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+      <line x1="400" y1="205" x2="400" y2="220" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+    </svg>
+  </div>
+
+  <div class="grid-4 fade-up" style="margin-top:2rem">
+    <div class="stat-card"><div class="stat-number" data-count="95" data-suf="+">0+</div><div class="stat-desc">Unit tests passing</div></div>
+    <div class="stat-card"><div class="stat-number" data-count="12">0</div><div class="stat-desc">End-to-end tests</div></div>
+    <div class="stat-card"><div class="stat-number" data-count="100" data-suf="%">0%</div><div class="stat-desc">KUSS verification</div></div>
+    <div class="stat-card"><div class="stat-number">7</div><div class="stat-desc">Security layers</div></div>
+  </div>
+</div></section>
+
+<section class="section" style="background:linear-gradient(180deg,transparent,rgba(232,121,47,0.01),transparent)"><div class="container max-w-900 mx-auto">
+  <div class="section-header fade-up"><span class="section-label">Layer 1</span><h2>PQC Signing Engine</h2></div>
+  <div class="fade-up">
+    <div class="feature-row">
+      <div class="feature-row-visual"><svg class="icon big-icon" viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5.5-3.8 10.7-8 12-4.2-1.3-8-6.5-8-12V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
+      <div class="feature-row-content"><h3>ML-DSA (FIPS 204)</h3><p>Module-Lattice Digital Signature Algorithm. Security from the Module Learning With Errors (MLWE) problem. Fast signing (~2ms), compact signatures (~3.3 KB). Primary signer for performance-critical operations.</p><span class="pill pill-accent">Lattice-based</span><span class="pill pill-blue">~2ms signing</span><span class="pill pill-green">3.3 KB signatures</span></div>
+    </div>
+    <div class="feature-row reversed">
+      <div class="feature-row-visual"><svg class="icon big-icon" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+      <div class="feature-row-content"><h3>SLH-DSA (FIPS 205)</h3><p>Stateless Hash-based Digital Signature Algorithm. Security from hash functions only — the most conservative cryptographic assumption known. Larger signatures (~7.8 KB) but minimal mathematical assumptions. Secondary signer for maximum assurance.</p><span class="pill pill-accent">Hash-based</span><span class="pill pill-blue">~50ms signing</span><span class="pill pill-green">Conservative</span></div>
+    </div>
+    <div class="feature-row">
+      <div class="feature-row-visual"><svg class="icon big-icon" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
+      <div class="feature-row-content"><h3>DualSign + Merkle Commitment</h3><p>Both algorithms sign simultaneously. Both must verify. If a breakthrough breaks lattice assumptions, hash-based signatures remain secure. All epoch public keys committed to a Merkle tree for O(log n) verification.</p><span class="pill pill-accent">Dual verification</span><span class="pill pill-blue">O(log n)</span></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="section"><div class="container max-w-900 mx-auto">
+  <div class="section-header fade-up"><span class="section-label">Layer 2</span><h2>DyLWE Deterministic Core</h2></div>
+  <div class="fade-up">
+    <div class="feature-block featured"><h4><svg class="icon" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg> Why Not Just RNG?</h4><p>External randomness (OS RNG) cannot be audited, reproduced, or tested deterministically. It's vulnerable to rollback attacks. PhoenixSig needs a core that evolves forward-only, produces unpredictable but reproducible output, and never depends on external entropy for state progression.</p></div>
+    <div class="feature-block"><h4><svg class="icon" viewBox="0 0 24 24"><path d="M21 2l-2 2m-7.6 7.6a5.5 5.5 0 1 0-7.8 7.8 5.5 5.5 0 0 0 7.8-7.8zm0 0L15.3 8.7m0 0l3 3L21 9l-3-3m-2.7 2.7L18 6"/></svg> Module Ring Operations</h4><p>DyLWE operates on R_q = Z_q[X]/(X^N+1). Learning With Rounding provides deterministic noise through rounding operations — no sampling, no external randomness in the evolution step. State size: ~few KB.</p></div>
+    <div class="feature-block"><h4><svg class="icon" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Epoch Key Derivation</h4><p>seed_epoch = HKDF(VaultKey ∥ sigma ∥ ctx). Every signing key is derived from hardware secret + evolving state + operation context. Deterministic, auditable, but unpredictable without VaultKey.</p></div>
+    <div class="feature-block"><h4><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Forward-Only State</h4><p>DeviceState = { sigma, epoch, counter, refresh_pending }. State only moves forward — sigma evolves with every signing operation. Monotonic counters and state hash chains enforce anti-rollback.</p></div>
+  </div>
+</div></section>
+
+<section class="section" style="background:linear-gradient(180deg,transparent,rgba(232,121,47,0.01),transparent)"><div class="container max-w-900 mx-auto">
+  <div class="section-header fade-up"><span class="section-label">Layer 3</span><h2>Phoenix Injection — <span class="highlight">Post-Compromise Security</span></h2></div>
+  <div class="fade-up">
+    <div class="quote-card"><p>No PCS without new entropy after compromise. DyLWE alone is not sufficient. Epoch keys alone are not sufficient. Phoenix Injection is mandatory.</p><div class="quote-src">— The PhoenixSig design invariant</div></div>
+  </div>
+  <div class="fade-up" style="margin-top:2.5rem">
+    <div class="feature-block featured"><h4><svg class="icon" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg> VaultKey &amp; TEE</h4><p>Each device holds a VaultKey in a Trusted Execution Environment (Android Keystore / Secure Enclave). Non-exportable. All key derivation flows through VaultKey. This is the PCS invariant — violate it, and PCS dies.</p></div>
+    <div class="feature-block featured"><h4><svg class="icon" viewBox="0 0 24 24"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.5 9a9 9 0 0 1 14.9-3.2L23 10M1 14l4.6 4.2A9 9 0 0 0 20.5 15"/></svg> Phoenix Refresh</h4><p>VaultKey ← HKDF(VaultKey ∥ new_secret, "phoenix"). After refresh, every future seed changes completely. An attacker with full RAM + storage snapshot before refresh has zero knowledge of future keys. The math is simple. The implications are profound.</p></div>
+    <div class="feature-block"><h4><svg class="icon" viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5.5-3.8 10.7-8 12-4.2-1.3-8-6.5-8-12V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg> The PCS Invariant (Rule #1)</h4><p>Every hash, KDF, PRF, and state evolution MUST depend on the current VaultKey: ctx = H("PhoenixSig|ctx", epoch, counter, message, policy, vault.salt32(...)). This rule is non-negotiable.</p></div>
+    <div class="feature-block"><h4><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Quarantine Protocol</h4><p>On reboot, suspected compromise, or sync loss: quarantine activates (refresh_pending = true). No real payloads signed — only pings and dummy operations. System waits for hardware-confirmed entropy injection before resuming real operations.</p></div>
+  </div>
+</div></section>
+
+<section class="section"><div class="container max-w-900 mx-auto">
+  <div class="section-header fade-up"><span class="section-label">Framework</span><h2>GenericPCSWrapper &amp; Algorithm Agility</h2></div>
+  <div class="grid-3 fade-up">
+    <div class="card-glow"><h4 style="color:var(--accent);margin-bottom:0.75rem"><svg class="icon" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> One-Day Integration</h4><p class="text-secondary" style="font-size:0.92rem">Any PQC algorithm implementing Sign(sk, msg) → sig and Verify(pk, msg, sig) → bool can be wrapped in PCS guarantees within one day.</p></div>
+    <div class="card-glow"><h4 style="color:var(--blue-light);margin-bottom:0.75rem"><svg class="icon" viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5.5-3.8 10.7-8 12-4.2-1.3-8-6.5-8-12V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg> KUSS Framework</h4><p class="text-secondary" style="font-size:0.92rem">Key Update Security Semantics — 5 axioms, 6 theorems. 100% validation pass rate. Mathematical proof that PCS properties hold across algorithm changes.</p></div>
+    <div class="card-glow"><h4 style="color:var(--green);margin-bottom:0.75rem"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.2 14.2 6 23 12 20 18 23 15.8 14.2"/></svg> FormalPCSModel</h4><p class="text-secondary" style="font-size:0.92rem">Mathematical proof framework validating forward secrecy, post-compromise recovery, epoch isolation, and state evolution correctness.</p></div>
+  </div>
+</div></section>
+
+<section class="cta-section"><div class="container"><h2 class="fade-up">Experience the architecture</h2><p class="fade-up">Free 30-day pilot. See self-healing cryptographic infrastructure in action.</p><div class="cta-buttons fade-up"><a href="mailto:contact@phoenixrise.io?subject=Pilot%20Request" class="btn btn-primary btn-lg">Start Free Pilot →</a><a href="/pricing.html" class="btn btn-secondary btn-lg">View Pricing →</a></div></div></section>
+
+<footer class="footer"><div class="footer-inner"><div class="footer-brand"><div class="nav-logo" style="margin-bottom:0.5rem"><svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="pl" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#E8792F"/><stop offset="100%" stop-color="#F5A623"/></linearGradient></defs><path d="M18 3C14 8 9 11 8 17c-1 5 2 9 6 11 .5-2.5 0-5 1.5-8 1 3 .5 6 2 9 1.5-3 1-6 1.5-8C21 24 20.5 27 21 29c4-2 7-6 6-11-1-6-5-9-9-15z" fill="url(#pl)"/><path d="M18 8c-2 3.5-5 6-6 9-.5 2 .5 5 2 6.5.5-2 .5-4 1.5-6 .5 2 0 4 1.5 6.5 1-2.5.5-4.5 1-6.5 1 2 .5 4.5 1.5 6.5 1.5-1.5 2.5-4 2-6.5-1-3-3.5-6.5-3.5-10z" fill="rgba(255,255,255,0.2)"/></svg> PHOENIX</div><p>Cryptographic infrastructure that survives compromise. Post-quantum signatures, self-healing keys, and the only MPC platform with Post-Compromise Security.</p><div class="footer-newsletter"><p>Stay updated on quantum security</p><form class="newsletter-form" onsubmit="event.preventDefault();this.innerHTML='<p style=color:var(--green)>✓ Subscribed!</p>'"><input type="email" placeholder="you@company.com" required><button type="submit">Subscribe</button></form></div></div><div class="footer-col"><h4>Products</h4><a href="/products/quantum-attestation.html">Quantum Attestation</a><a href="/products/phoenix-sign.html">PhoenixSig</a><a href="/products/phoenix-chain.html">Phoenix Chain</a><a href="/products/phoenix-cloud.html">Phoenix Cloud</a></div><div class="footer-col"><h4>Solutions</h4><a href="/solutions/bitcoin-custody.html">Bitcoin Custody</a><a href="/solutions/defi-security.html">DeFi &amp; L2</a><a href="/solutions/exchange-protection.html">Exchanges</a><a href="/solutions/stablecoin-cbdc.html">Stablecoin &amp; CBDC</a><a href="/solutions/enterprise-signing.html">Enterprise</a></div><div class="footer-col"><h4>Company</h4><a href="/about.html">About</a><a href="/technology.html">Technology</a><a href="/pricing.html">Pricing</a><a href="/blog/">Blog</a><a href="/verify.html">Verify</a><a href="/contact.html">Contact</a></div></div><div class="footer-bottom"><span>&copy; 2026 Phoenix Platform. All rights reserved.</span><span>contact@phoenixrise.io · security@phoenixrise.io</span></div></footer>
+<script>window.addEventListener('scroll',()=>{document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>40)});const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible')}})},{threshold:0.08,rootMargin:'0px 0px -40px 0px'});document.querySelectorAll('.fade-up').forEach(el=>io.observe(el));document.querySelectorAll('.faq-q').forEach(q=>{q.addEventListener('click',()=>q.parentElement.classList.toggle('open'))});document.querySelectorAll('[data-count]').forEach(el=>{const io2=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){const t=+el.dataset.count,d=el.dataset.duration||2000,s=performance.now();const pre=el.dataset.pre||'',suf=el.dataset.suf||'';(function anim(now){const p=Math.min((now-s)/d,1);el.textContent=pre+Math.floor(p*t)+suf;if(p<1)requestAnimationFrame(anim)})(s);io2.disconnect()}})},{threshold:0.5});io2.observe(el)});</script>
+</body>
+</html>

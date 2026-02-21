@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DualSign: Why Two Algorithms Are Better Than One — Phoenix Platform</title>
+  <meta name="description" content="ML-DSA and SLH-DSA use fundamentally different math. Signing with both provides genuine defense-in-depth against algorithmic breakthroughs.">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/styles.css">
+  <meta property="og:title" content="DualSign: Why Two Algorithms Are Better Than One — Phoenix Platform">
+  <meta property="og:description" content="ML-DSA and SLH-DSA use fundamentally different math. Signing with both provides genuine defense-in-depth against algorithmic breakthroughs.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://phoenixrise.io">
+  <meta property="og:site_name" content="Phoenix Platform">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DualSign: Why Two Algorithms Are Better Than One — Phoenix Platform">
+  <meta name="twitter:description" content="ML-DSA and SLH-DSA use fundamentally different math. Signing with both provides genuine defense-in-depth against algorithmic breakthroughs.">
+  
+</head>
+<body>
+  
+  <nav class="nav" id="mainNav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo"><svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs><linearGradient id="pl" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#E8792F"/><stop offset="100%" stop-color="#F5A623"/></linearGradient></defs>
+  <path d="M18 3C14 8 9 11 8 17c-1 5 2 9 6 11 .5-2.5 0-5 1.5-8 1 3 .5 6 2 9 1.5-3 1-6 1.5-8C21 24 20.5 27 21 29c4-2 7-6 6-11-1-6-5-9-9-15z" fill="url(#pl)"/>
+  <path d="M18 8c-2 3.5-5 6-6 9-.5 2 .5 5 2 6.5.5-2 .5-4 1.5-6 .5 2 0 4 1.5 6.5 1-2.5.5-4.5 1-6.5 1 2 .5 4.5 1.5 6.5 1.5-1.5 2.5-4 2-6.5-1-3-3.5-6.5-3.5-10z" fill="rgba(255,255,255,0.2)"/>
+</svg> PHOENIX</a>
+      <button class="nav-toggle" onclick="this.classList.toggle('active');document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">☰</button>
+      <div class="nav-links">
+        <div class="nav-dropdown">
+          <span class="nav-link nav-dropdown-trigger ">Products</span>
+          <div class="nav-dropdown-menu">
+            <a href="/products/quantum-attestation.html"><div class="dropdown-icon di-accent"><svg class="icon" viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5.5-3.8 10.7-8 12-4.2-1.3-8-6.5-8-12V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div><span>Quantum Attestation <span class="dropdown-badge badge-new">NEW</span></span></a>
+            <a href="/products/phoenix-sign.html"><div class="dropdown-icon di-blue"><svg class="icon" viewBox="0 0 24 24"><path d="M21 2l-2 2m-7.6 7.6a5.5 5.5 0 1 0-7.8 7.8 5.5 5.5 0 0 0 7.8-7.8zm0 0L15.3 8.7m0 0l3 3L21 9l-3-3m-2.7 2.7L18 6"/></svg></div><span>PhoenixSig</span></a>
+            <a href="/products/phoenix-chain.html"><div class="dropdown-icon di-green"><svg class="icon" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.8 1.8"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.8-1.8"/></svg></div><span>Phoenix Chain <span class="dropdown-badge badge-ready">READY</span></span></a>
+            <a href="/products/phoenix-cloud.html"><div class="dropdown-icon di-blue"><svg class="icon" viewBox="0 0 24 24"><path d="M18 10h-1.3A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div><span>Phoenix Cloud <span class="dropdown-badge badge-soon">SOON</span></span></a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <span class="nav-link nav-dropdown-trigger ">Solutions</span>
+          <div class="nav-dropdown-menu">
+            <a href="/solutions/bitcoin-custody.html"><svg class="icon" viewBox="0 0 24 24"><path d="M11.8 2v2.4M11.8 19.6V22M15.2 4.4H10c-1.1 0-2 .9-2 2v0c0 1.1.9 2 2 2h4.4c1.1 0 2 .9 2 2v0c0 1.1-.9 2-2 2H8M15.2 12.4H10c-1.1 0-2 .9-2 2v0c0 1.1.9 2 2 2h5.2c1.1 0 2 .9 2 2v0c0 1.1-.9 2-2 2H8"/></svg> Bitcoin Custody</a>
+            <a href="/solutions/defi-security.html"><svg class="icon" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg> DeFi &amp; L2</a>
+            <a href="/solutions/exchange-protection.html"><svg class="icon" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.7-4 3-9 3s-9-1.3-9-3"/><path d="M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5"/></svg> Exchanges</a>
+            <a href="/solutions/stablecoin-cbdc.html"><svg class="icon" viewBox="0 0 24 24"><path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3"/></svg> Stablecoin &amp; CBDC</a>
+            <a href="/solutions/enterprise-signing.html"><svg class="icon" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg> Enterprise &amp; Government</a>
+          </div>
+        </div>
+        <a href="/technology.html" class="nav-link ">Technology</a>
+        <a href="/pricing.html" class="nav-link ">Pricing</a>
+        <a href="/blog/" class="nav-link active">Blog</a>
+        <a href="/about.html" class="nav-link ">About</a>
+        <a href="/verify.html" class="nav-verify"><svg class="icon" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> Verify</a>
+      </div>
+    </div>
+  </nav>
+  
+  <section class="page-hero">
+    <span class="section-label">Blog · Feb 8, 2026 · 6 min read</span>
+    <h1>DualSign: Why Two Algorithms Are <span class="highlight">Better Than One</span></h1>
+  </section>
+
+  <section class="section">
+    <div class="blog-content">
+      <p>When NIST finalized its post-quantum signature standards in 2024, two algorithms emerged: ML-DSA (FIPS 204) based on module lattices, and SLH-DSA (FIPS 205) based on hash functions. Most implementers pick one. Phoenix uses both simultaneously.</p>
+      <p>This isn't redundancy for the sake of redundancy. It's a deliberate engineering decision with deep cryptographic reasoning.</p>
+
+      <h2>Different Math, Different Risks</h2>
+      <p>ML-DSA's security relies on the hardness of the Module Learning With Errors (MLWE) problem. This is a lattice-based construction — a relatively new area of cryptography that has shown tremendous promise but has a shorter track record than hash-based approaches.</p>
+      <p>SLH-DSA's security relies only on the security of hash functions. Hash-based signatures have been studied since the 1970s (Lamport signatures). The mathematical assumptions are minimal — arguably the most conservative in all of cryptography.</p>
+      <p>These are fundamentally different mathematical foundations. A breakthrough that breaks lattice assumptions would not affect hash-based signatures. A weakness found in the specific hash construction would not affect lattice-based schemes.</p>
+
+      <h2>The Cost of Being Wrong</h2>
+      <p>In traditional software, you can patch a vulnerability and move on. In cryptography, being wrong is catastrophic. If the algorithm protecting a $100 million custody operation is broken, there is no patch — the signatures are already compromised.</p>
+      <p>DualSign eliminates single-algorithm risk. Both ML-DSA and SLH-DSA must verify for an attestation to be valid. An attacker must break both mathematical problems simultaneously — a dramatically higher bar than breaking either one alone.</p>
+
+      <h2>Performance Tradeoffs</h2>
+      <p>ML-DSA is fast: signing takes roughly 2 milliseconds with compact signatures around 3.3 KB. SLH-DSA is slower — signing takes roughly 50 milliseconds with larger signatures around 7.8 KB (for SLH-DSA-128s).</p>
+      <p>For Phoenix's use case — attestation of cryptocurrency transactions — this performance cost is negligible. Transaction settlement times are measured in seconds to minutes. An additional 50ms for a second quantum-safe signature is invisible.</p>
+      <p>The storage overhead (roughly 11 KB per dual attestation) is similarly trivial compared to the value being protected. When you're securing millions in digital assets, 11 KB of signature data is not the bottleneck.</p>
+
+      <h2>When One Algorithm Falls</h2>
+      <p>Cryptographic history is filled with algorithms that were considered secure until they weren't. MD5 was widely used for decades before collision attacks made it obsolete. SHA-1 followed a similar path. RSA key sizes have been revised upward repeatedly.</p>
+      <p>We don't know when — or if — ML-DSA or SLH-DSA will face a similar breakthrough. But we can architect systems that survive the possibility. DualSign is that architecture.</p>
+      <p>If ML-DSA is broken tomorrow, every Phoenix attestation is still protected by SLH-DSA. If SLH-DSA faces an issue, ML-DSA continues to provide security. The system degrades gracefully instead of failing catastrophically.</p>
+
+      <blockquote>In cryptography, the cost of defense-in-depth is measured in milliseconds. The cost of single-algorithm failure is measured in billions.</blockquote>
+
+      <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+        <p class="text-muted" style="font-size:0.88rem">Written by the Phoenix Platform team. For questions, contact <a href="mailto:contact@phoenixrise.io">contact@phoenixrise.io</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="cta-section">
+    <div class="container">
+      <h2 class="fade-up">Try DualSign verification</h2>
+      <p class="fade-up">Verify a live dual-algorithm attestation on our verification page.</p>
+      <div class="cta-buttons fade-up">
+        <a href="/verify.html" class="btn btn-primary btn-lg">Verify Now →</a>
+        <a href="/products/quantum-attestation.html" class="btn btn-secondary btn-lg">Learn More →</a>
+      </div>
+    </div>
+  </section>
+  
+  
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="nav-logo" style="margin-bottom:0.5rem"><svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs><linearGradient id="pl" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#E8792F"/><stop offset="100%" stop-color="#F5A623"/></linearGradient></defs>
+  <path d="M18 3C14 8 9 11 8 17c-1 5 2 9 6 11 .5-2.5 0-5 1.5-8 1 3 .5 6 2 9 1.5-3 1-6 1.5-8C21 24 20.5 27 21 29c4-2 7-6 6-11-1-6-5-9-9-15z" fill="url(#pl)"/>
+  <path d="M18 8c-2 3.5-5 6-6 9-.5 2 .5 5 2 6.5.5-2 .5-4 1.5-6 .5 2 0 4 1.5 6.5 1-2.5.5-4.5 1-6.5 1 2 .5 4.5 1.5 6.5 1.5-1.5 2.5-4 2-6.5-1-3-3.5-6.5-3.5-10z" fill="rgba(255,255,255,0.2)"/>
+</svg> PHOENIX</div>
+        <p>Cryptographic infrastructure that survives compromise. Post-quantum signatures, self-healing keys, and the only MPC platform with Post-Compromise Security.</p>
+        <div class="footer-newsletter">
+          <p>Stay updated on quantum security</p>
+          <form class="newsletter-form" onsubmit="event.preventDefault();this.innerHTML='<p style=color:var(--green)>✓ Subscribed!</p>'">
+            <input type="email" placeholder="you@company.com" required>
+            <button type="submit">Subscribe</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Products</h4>
+        <a href="/products/quantum-attestation.html">Quantum Attestation</a>
+        <a href="/products/phoenix-sign.html">PhoenixSig</a>
+        <a href="/products/phoenix-chain.html">Phoenix Chain</a>
+        <a href="/products/phoenix-cloud.html">Phoenix Cloud</a>
+      </div>
+      <div class="footer-col">
+        <h4>Solutions</h4>
+        <a href="/solutions/bitcoin-custody.html">Bitcoin Custody</a>
+        <a href="/solutions/defi-security.html">DeFi &amp; L2</a>
+        <a href="/solutions/exchange-protection.html">Exchanges</a>
+        <a href="/solutions/stablecoin-cbdc.html">Stablecoin &amp; CBDC</a>
+        <a href="/solutions/enterprise-signing.html">Enterprise</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="/about.html">About</a>
+        <a href="/technology.html">Technology</a>
+        <a href="/pricing.html">Pricing</a>
+        <a href="/blog/">Blog</a>
+        <a href="/verify.html">Verify</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Phoenix Platform. All rights reserved.</span>
+      <span>contact@phoenixrise.io · security@phoenixrise.io</span>
+    </div>
+  </footer>
+  
+  <script>
+    // Nav scroll effect
+    window.addEventListener('scroll',()=>{document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>40)});
+    // Scroll animations
+    const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible')}})},{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
+    document.querySelectorAll('.fade-up').forEach(el=>io.observe(el));
+    // FAQ
+    document.querySelectorAll('.faq-q').forEach(q=>{q.addEventListener('click',()=>q.parentElement.classList.toggle('open'))});
+    // Counter animation
+    document.querySelectorAll('[data-count]').forEach(el=>{
+      const io2=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){
+        const t=+el.dataset.count,d=el.dataset.duration||2000,s=performance.now();
+        const pre=el.dataset.pre||'',suf=el.dataset.suf||'';
+        (function anim(now){const p=Math.min((now-s)/d,1);el.textContent=pre+Math.floor(p*t)+suf;if(p<1)requestAnimationFrame(anim)})(s);
+        io2.disconnect()}})},{threshold:0.5});
+      io2.observe(el);
+    });
+  </script>
+</body>
+</html>
