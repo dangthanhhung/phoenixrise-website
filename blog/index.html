@@ -8,7 +8,7 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="/styles.css?v=3.6">
+  <link rel="stylesheet" href="/styles.css?v=3.7">
   <meta property="og:title" content="Blog — Phoenix Platform">
   <meta property="og:description" content="Insights on post-quantum cryptography, Post-Compromise Security, and the future of digital asset custody.">
   <meta property="og:type" content="website">
@@ -116,8 +116,8 @@
         <p>Cryptographic infrastructure that survives compromise. Post-quantum signatures, self-healing keys, and the only MPC platform with Post-Compromise Security.</p>
         <div class="footer-newsletter">
           <p>Stay updated on quantum security</p>
-          <form class="newsletter-form" onsubmit="event.preventDefault();this.innerHTML='<p style=color:var(--green)>✓ Subscribed!</p>'">
-            <input type="email" placeholder="you@company.com" required>
+          <form class="newsletter-form" onsubmit="return submitNewsletter(this,event)">
+            <input type="email" name="email" placeholder="you@company.com" required>
             <button type="submit">Subscribe</button>
           </form>
         </div>
@@ -173,5 +173,18 @@
       io2.observe(el);
     });
   </script>
+<script>
+async function submitNewsletter(form,e){
+  e.preventDefault();
+  var email=form.querySelector('input[type=email]').value;
+  var btn=form.querySelector('button');
+  var FSID='xwvqjjnl'; // ← Paste Formspree newsletter form ID here
+  var W3K='';  // ← OR paste Web3Forms key here
+  btn.textContent='...';
+  if(FSID){try{var r=await fetch('https://formspree.io/f/'+FSID,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({email:email,_subject:'Newsletter: '+email})});if(r.ok){form.innerHTML='<p style="color:var(--green)">✓ Subscribed!</p>';return false}}catch(e){}}
+  if(W3K){try{var r=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({access_key:W3K,email:email,subject:'Newsletter subscribe: '+email})});var d=await r.json();if(d.success){form.innerHTML='<p style="color:var(--green)">✓ Subscribed!</p>';return false}}catch(e){}}
+  window.open('mailto:contact@phoenixrise.io?subject=Newsletter%20Subscribe&body=Please%20subscribe%20'+encodeURIComponent(email)+'%20to%20Phoenix%20updates','_self');
+  btn.textContent='Subscribe';return false}
+</script>
 </body>
 </html>

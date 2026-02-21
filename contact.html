@@ -8,7 +8,7 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="/styles.css?v=3.6">
+  <link rel="stylesheet" href="/styles.css?v=3.7">
   <meta property="og:title" content="Contact — Phoenix Platform">
   <meta property="og:description" content="Get in touch with Phoenix Platform. Start a free pilot, request a demo, or ask about enterprise pricing.">
   <meta property="og:type" content="website">
@@ -72,38 +72,137 @@
       <div class="grid-2 fade-up" style="gap:4rem">
         <div>
           <h3 style="margin-bottom:1.5rem">Send us a message</h3>
-          <form action="https://formspree.io/f/placeholder" method="POST" onsubmit="event.preventDefault();this.innerHTML='<div class=scenario><h4>✓ Message sent</h4><p>We\'ll respond within 24 hours. Check your inbox.</p></div>'">
+          <form id="contactForm" onsubmit="return submitContact(event)">
+            <input type="hidden" name="_subject" value="New inquiry from phoenixrise.io">
             <div class="form-row">
-              <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your name" required></div>
-              <div class="form-group"><label>Company</label><input type="text" name="company" placeholder="Company name"></div>
+              <div class="form-group"><label>Name *</label><input type="text" name="name" id="cf_name" placeholder="Your name" required></div>
+              <div class="form-group"><label>Company</label><input type="text" name="company" id="cf_company" placeholder="Company name"></div>
             </div>
-            <div class="form-group"><label>Email</label><input type="email" name="email" placeholder="you@company.com" required></div>
+            <div class="form-group"><label>Email *</label><input type="email" name="email" id="cf_email" placeholder="you@company.com" required></div>
             <div class="form-group">
               <label>Interest</label>
-              <select name="interest">
+              <select name="interest" id="cf_interest">
                 <option value="">Select...</option>
-                <option>Free Pilot</option>
-                <option>Quantum Attestation</option>
-                <option>Phoenix Chain (MPC)</option>
-                <option>Phoenix Cloud</option>
-                <option>Enterprise Pricing</option>
-                <option>Partnership</option>
-                <option>Other</option>
+                <option value="Free Pilot">Free 30-Day Pilot</option>
+                <option value="Quantum Attestation">Quantum Attestation</option>
+                <option value="Phoenix Chain">Phoenix Chain (MPC Wallet)</option>
+                <option value="Phoenix Cloud">Phoenix Cloud (Managed Custody)</option>
+                <option value="PhoenixSig SDK">PhoenixSig SDK</option>
+                <option value="Enterprise Pricing">Enterprise Pricing</option>
+                <option value="Partnership">Partnership</option>
+                <option value="Security">Security Inquiry</option>
+                <option value="Other">Other</option>
               </select>
             </div>
-            <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your use case..." required></textarea></div>
-            <button type="submit" class="btn btn-primary btn-lg" style="width:100%"><svg class="icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Send Message</button>
+            <div class="form-group"><label>Message *</label><textarea name="message" id="cf_message" placeholder="Tell us about your use case, team size, and timeline..." required></textarea></div>
+            <button type="submit" class="btn btn-primary btn-lg" id="contactBtn" style="width:100%">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              Send Message
+            </button>
+            <div id="contactStatus" style="margin-top:1rem;display:none"></div>
           </form>
         </div>
         <div>
           <h3 style="margin-bottom:1.5rem">Other ways to reach us</h3>
-          <div class="feature-block"><h4><svg class="icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Email</h4><p><a href="mailto:contact@phoenixrise.io">contact@phoenixrise.io</a> — General inquiries<br><a href="mailto:security@phoenixrise.io">security@phoenixrise.io</a> — Security &amp; vulnerability disclosure<br><a href="mailto:careers@phoenixrise.io">careers@phoenixrise.io</a> — Career opportunities</p></div>
-          <div class="feature-block"><h4><svg class="icon" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Quick Actions</h4><p><a href="mailto:contact@phoenixrise.io?subject=Pilot%20Request">→ Start a free 30-day pilot</a><br><a href="mailto:contact@phoenixrise.io?subject=Enterprise%20Pricing">→ Request enterprise pricing</a><br><a href="mailto:contact@phoenixrise.io?subject=Partnership%20Inquiry">→ Discuss partnership</a></p></div>
-          <div class="feature-block"><h4><svg class="icon" viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5.5-3.8 10.7-8 12-4.2-1.3-8-6.5-8-12V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg> Responsible Disclosure</h4><p>Found a security issue? Email <a href="mailto:security@phoenixrise.io">security@phoenixrise.io</a> with details. We take every report seriously and will respond within 24 hours.</p></div>
+          <div class="feature-block"><h4><svg class="icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Email directly</h4><p><a href="mailto:contact@phoenixrise.io">contact@phoenixrise.io</a> — General inquiries &amp; pilots<br><a href="mailto:partners@phoenixrise.io">partners@phoenixrise.io</a> — Partnership opportunities<br><a href="mailto:security@phoenixrise.io">security@phoenixrise.io</a> — Security &amp; vulnerability disclosure<br><a href="mailto:careers@phoenixrise.io">careers@phoenixrise.io</a> — Career opportunities</p></div>
+          <div class="feature-block"><h4><svg class="icon" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Quick Actions</h4><p><a href="mailto:contact@phoenixrise.io?subject=Pilot%20Request&body=Hi%20Phoenix%20team%2C%0A%0AI'm%20interested%20in%20a%20free%2030-day%20pilot.%0A%0ACompany%3A%20%0AUse%20case%3A%20%0ATimeline%3A%20">→ Start a free 30-day pilot</a><br><a href="mailto:contact@phoenixrise.io?subject=Enterprise%20Pricing%20Request&body=Hi%2C%0A%0AWe'd%20like%20to%20discuss%20enterprise%20pricing.%0A%0ACompany%3A%20%0ATeam%20size%3A%20%0AProducts%20interested%3A%20">→ Request enterprise pricing</a><br><a href="mailto:partners@phoenixrise.io?subject=Partnership%20Inquiry">→ Discuss partnership</a></p></div>
+          <div class="feature-block"><h4><svg class="icon" viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5.5-3.8 10.7-8 12-4.2-1.3-8-6.5-8-12V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg> Responsible Disclosure</h4><p>Found a security issue? Email <a href="mailto:security@phoenixrise.io">security@phoenixrise.io</a> with details. We take every report seriously and respond within 24 hours.</p></div>
+          <div class="feature-block" style="background:rgba(232,121,47,0.03);border-left-color:var(--accent)"><h4><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Response Times</h4><p><strong style="color:var(--text-primary)">Pilot requests:</strong> within 4 hours<br><strong style="color:var(--text-primary)">General inquiries:</strong> within 24 hours<br><strong style="color:var(--text-primary)">Security reports:</strong> within 24 hours</p></div>
         </div>
       </div>
     </div>
   </section>
+
+  <script>
+  // ══════════════════════════════════════════════════════════════
+  // FORM SETUP — Hung, làm 1 trong 2 bước sau:
+  //
+  // OPTION A — Formspree (recommended, 2 phút):
+  //   1. Vào https://formspree.io → Sign up free
+  //   2. "New Form" → tên "Phoenix Contact" → email: contact@phoenixrise.io
+  //   3. Copy form ID (VD: 'mwpevkjb')
+  //   4. Thay dòng bên dưới:  FORMSPREE_ID = 'mwpevkjb'
+  //   5. Tạo form thứ 2 tên "Newsletter" → copy ID → thay FORMSPREE_NEWSLETTER
+  //   6. Deploy lại → DONE. Form gửi thẳng vào email.
+  //
+  // OPTION B — Web3Forms (không cần signup):
+  //   1. Vào https://web3forms.com → nhập contact@phoenixrise.io
+  //   2. Check email → copy access key
+  //   3. Thay WEB3_KEY bên dưới
+  //
+  // Khi chưa setup → form mở email client với nội dung đã điền sẵn.
+  // ══════════════════════════════════════════════════════════════
+  const FORMSPREE_ID = 'xwvqjjnl';       // ← Paste Formspree form ID here
+  const WEB3_KEY = '';           // ← OR paste Web3Forms access key here
+
+  async function submitContact(e) {
+    e.preventDefault();
+    const btn = document.getElementById('contactBtn');
+    const status = document.getElementById('contactStatus');
+    const form = document.getElementById('contactForm');
+
+    const name = document.getElementById('cf_name').value.trim();
+    const email = document.getElementById('cf_email').value.trim();
+    const company = document.getElementById('cf_company').value.trim();
+    const interest = document.getElementById('cf_interest').value;
+    const message = document.getElementById('cf_message').value.trim();
+    const subj = 'Phoenix Contact: ' + (interest || 'General') + ' from ' + (company || name);
+
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    status.style.display = 'none';
+
+    // ── Try Formspree ──
+    if (FORMSPREE_ID) {
+      try {
+        const r = await fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({ name, email, company, interest, message, _subject: subj })
+        });
+        if (r.ok) { showSuccess(form, email); return false; }
+      } catch(err) {}
+    }
+
+    // ── Try Web3Forms ──
+    if (WEB3_KEY) {
+      try {
+        const r = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ access_key: WEB3_KEY, name, email, company, interest, message, subject: subj })
+        });
+        const data = await r.json();
+        if (data.success) { showSuccess(form, email); return false; }
+      } catch(err) {}
+    }
+
+    // ── Fallback: mailto ──
+    const mailto = 'mailto:contact@phoenixrise.io'
+      + '?subject=' + encodeURIComponent(subj)
+      + '&body=' + encodeURIComponent(
+        'Name: ' + name
+        + '\nEmail: ' + email
+        + '\nCompany: ' + (company || 'N/A')
+        + '\nInterest: ' + (interest || 'N/A')
+        + '\n\n' + message
+      );
+    window.open(mailto, '_self');
+
+    btn.disabled = false;
+    btn.innerHTML = '<svg class="icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Send Message';
+    status.style.display = 'block';
+    status.innerHTML = '<div style="padding:1rem;background:rgba(232,121,47,0.06);border:1px solid rgba(232,121,47,0.2);border-radius:8px"><p style="color:var(--text-primary);font-weight:600;margin-bottom:0.3rem">📧 Your email app should open now</p><p style="color:var(--text-secondary);font-size:0.85rem;margin:0">Hit Send in your email client to deliver the message. Or email <a href="mailto:contact@phoenixrise.io" style="color:var(--accent)">contact@phoenixrise.io</a> directly.</p></div>';
+    return false;
+  }
+
+  function showSuccess(form, email) {
+    form.innerHTML = '<div style="text-align:center;padding:3rem 1rem">'
+      + '<div style="width:64px;height:64px;border-radius:50%;background:rgba(76,175,80,0.1);border:2px solid var(--green);display:inline-flex;align-items:center;justify-content:center;margin-bottom:1.25rem"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></div>'
+      + '<h3 style="color:var(--green);margin-bottom:0.5rem">Message received!</h3>'
+      + '<p class="text-secondary">We\'ll respond within 24 hours at <strong style="color:var(--text-primary)">' + email + '</strong></p></div>';
+  }
+  </script>
   
   
   <footer class="footer">
@@ -117,8 +216,8 @@
         <p>Cryptographic infrastructure that survives compromise. Post-quantum signatures, self-healing keys, and the only MPC platform with Post-Compromise Security.</p>
         <div class="footer-newsletter">
           <p>Stay updated on quantum security</p>
-          <form class="newsletter-form" onsubmit="event.preventDefault();this.innerHTML='<p style=color:var(--green)>✓ Subscribed!</p>'">
-            <input type="email" placeholder="you@company.com" required>
+          <form class="newsletter-form" onsubmit="return submitNewsletter(this,event)">
+            <input type="email" name="email" placeholder="you@company.com" required>
             <button type="submit">Subscribe</button>
           </form>
         </div>
@@ -174,5 +273,18 @@
       io2.observe(el);
     });
   </script>
+<script>
+async function submitNewsletter(form,e){
+  e.preventDefault();
+  var email=form.querySelector('input[type=email]').value;
+  var btn=form.querySelector('button');
+  var FSID='xwvqjjnl'; // ← Paste Formspree newsletter form ID here
+  var W3K='';  // ← OR paste Web3Forms key here
+  btn.textContent='...';
+  if(FSID){try{var r=await fetch('https://formspree.io/f/'+FSID,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({email:email,_subject:'Newsletter: '+email})});if(r.ok){form.innerHTML='<p style="color:var(--green)">✓ Subscribed!</p>';return false}}catch(e){}}
+  if(W3K){try{var r=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({access_key:W3K,email:email,subject:'Newsletter subscribe: '+email})});var d=await r.json();if(d.success){form.innerHTML='<p style="color:var(--green)">✓ Subscribed!</p>';return false}}catch(e){}}
+  window.open('mailto:contact@phoenixrise.io?subject=Newsletter%20Subscribe&body=Please%20subscribe%20'+encodeURIComponent(email)+'%20to%20Phoenix%20updates','_self');
+  btn.textContent='Subscribe';return false}
+</script>
 </body>
 </html>
