@@ -22,4 +22,9 @@
   <url><loc>https://phoenixrise.io/technology.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://phoenixrise.io/terms.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://phoenixrise.io/verify.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://phoenixrise.io/blog/nist-pqc-standards-practical-guide.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://phoenixrise.io/blog/mpc-wallet-security-comparison.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://phoenixrise.io/blog/epoch-based-key-management.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://phoenixrise.io/blog/seven-layers-cryptographic-defense.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://phoenixrise.io/blog/algorithm-agility-crypto-infrastructure.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
 </urlset>

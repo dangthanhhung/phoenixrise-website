@@ -3,24 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Blog — Phoenix Platform</title>
-  <meta name="description" content="Insights on post-quantum cryptography, Post-Compromise Security, and the future of digital asset custody.">
+  <title>The Seven Layers of Cryptographic Defense — Phoenix Platform</title>
+  <meta name="description" content="Why defense-in-depth matters for digital asset security and how a layered architecture prevents single points of cryptographic failure.">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="/styles.css?v=3.8">
-  <meta property="og:title" content="Blog — Phoenix Platform">
-  <meta property="og:description" content="Insights on post-quantum cryptography, Post-Compromise Security, and the future of digital asset custody.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://phoenixrise.io">
+  <meta property="og:title" content="The Seven Layers of Cryptographic Defense — Phoenix Platform">
+  <meta property="og:description" content="Why defense-in-depth matters for digital asset security and how a layered architecture prevents single points of cryptographic failure.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://phoenixrise.io/blog/seven-layers-cryptographic-defense.html">
   <meta property="og:site_name" content="Phoenix Platform">
   <meta property="og:image" content="https://phoenixrise.io/og-image.svg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Blog — Phoenix Platform">
-  <meta name="twitter:description" content="Insights on post-quantum cryptography, Post-Compromise Security, and the future of digital asset custody.">
+  <meta name="twitter:title" content="The Seven Layers of Cryptographic Defense — Phoenix Platform">
+  <meta name="twitter:description" content="Why defense-in-depth matters for digital asset security and how a layered architecture prevents single points of cryptographic failure.">
   <meta name="twitter:image" content="https://phoenixrise.io/og-image.svg">
-  
-  <link rel="canonical" href="https://phoenixrise.io/blog/">
+  <link rel="canonical" href="https://phoenixrise.io/blog/seven-layers-cryptographic-defense.html">
 </head>
 <body>
   
@@ -54,7 +53,7 @@
         </div>
         <a href="/technology.html" class="nav-link ">Technology</a>
         <a href="/pricing.html" class="nav-link ">Pricing</a>
-        <a href="/blog/" class="nav-link active">Blog</a>
+        <a href="/blog/" class="nav-link">Blog</a>
         <a href="/about.html" class="nav-link ">About</a>
         <a href="/verify.html" class="nav-verify"><svg class="icon" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> Verify</a>
       </div>
@@ -62,74 +61,76 @@
   </nav>
   
   <section class="page-hero">
-    <span class="section-label">Blog</span>
-    <h1>Insights &amp; <span class="highlight">Research</span></h1>
-    <p class="hero-sub">Post-quantum cryptography, Post-Compromise Security, and the future of digital asset protection.</p>
+    <span class="section-label">Blog · Feb 5, 2026 · 8 min read</span>
+    <h1>The Seven Layers of <span class="highlight">Cryptographic Defense</span></h1>
   </section>
 
   <section class="section">
-    <div class="container">
-      <div class="grid-3">
-        <a href="/blog/nist-pqc-standards-practical-guide.html" class="card blog-card fade-up" style="text-decoration:none">
-          <div class="card-icon card-icon-accent"><svg class="icon" viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5.5-3.8 10.7-8 12-4.2-1.3-8-6.5-8-12V6l8-4z"/></svg></div>
-          <h3>NIST Post-Quantum Standards: A Practical Guide for Security Teams</h3>
-          <p>FIPS 203, 204, and 205 are finalized. What they mean, how they differ, and what your team needs to do now.</p>
-          <div class="blog-meta">Feb 18, 2026 · 10 min read</div>
-        </a>
-        <a href="/blog/why-pcs-matters.html" class="card blog-card fade-up" style="text-decoration:none">
-          <div class="card-icon card-icon-accent"><svg class="icon" viewBox="0 0 24 24"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.5 9a9 9 0 0 1 14.9-3.2L23 10M1 14l4.6 4.2A9 9 0 0 0 20.5 15"/></svg></div>
-          <h3>Why Post-Compromise Security Matters More Than PQC</h3>
-          <p>The industry is focused on quantum resistance. But the bigger, more immediate threat is what happens after keys are stolen — today.</p>
-          <div class="blog-meta">Feb 15, 2026 · 8 min read</div>
-        </a>
-        <a href="/blog/mpc-wallet-security-comparison.html" class="card blog-card fade-up" style="text-decoration:none">
-          <div class="card-icon card-icon-blue"><svg class="icon" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.8 1.8"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.8-1.8"/></svg></div>
-          <h3>MPC Wallet Security: What the Industry Gets Wrong</h3>
-          <p>MPC distributes trust but does not solve recovery after compromise. Understanding the gap between threshold security and operational resilience.</p>
-          <div class="blog-meta">Feb 12, 2026 · 9 min read</div>
-        </a>
-        <a href="/blog/epoch-based-key-management.html" class="card blog-card fade-up" style="text-decoration:none">
-          <div class="card-icon card-icon-green"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-          <h3>Epoch-Based Key Management: Why Permanent Keys Are a Liability</h3>
-          <p>The longer a key exists, the more time attackers have to steal it. Epoch-based rotation eliminates permanent keys entirely.</p>
-          <div class="blog-meta">Feb 8, 2026 · 7 min read</div>
-        </a>
-        <a href="/blog/dualsign-explained.html" class="card blog-card fade-up" style="text-decoration:none">
-          <div class="card-icon card-icon-blue"><svg class="icon" viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5.5-3.8 10.7-8 12-4.2-1.3-8-6.5-8-12V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
-          <h3>DualSign: Why Two Algorithms Are Better Than One</h3>
-          <p>Using two independent PQC algorithms for every signature. The engineering rationale behind ML-DSA + SLH-DSA dual attestation.</p>
-          <div class="blog-meta">Feb 6, 2026 · 6 min read</div>
-        </a>
-        <a href="/blog/seven-layers-cryptographic-defense.html" class="card blog-card fade-up" style="text-decoration:none">
-          <div class="card-icon card-icon-accent"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
-          <h3>The Seven Layers of Cryptographic Defense</h3>
-          <p>Why defense-in-depth matters for digital asset security and how a layered architecture prevents single points of cryptographic failure.</p>
-          <div class="blog-meta">Feb 5, 2026 · 8 min read</div>
-        </a>
-        <a href="/blog/harvest-now-decrypt-later.html" class="card blog-card fade-up" style="text-decoration:none">
-          <div class="card-icon card-icon-green"><svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
-          <h3>Harvest Now, Decrypt Later: The $2 Trillion Risk</h3>
-          <p>Adversaries are collecting encrypted data today, waiting for quantum computers to break it tomorrow. What this means for blockchain.</p>
-          <div class="blog-meta">Feb 3, 2026 · 7 min read</div>
-        </a>
-        <a href="/blog/algorithm-agility-crypto-infrastructure.html" class="card blog-card fade-up" style="text-decoration:none">
-          <div class="card-icon card-icon-blue"><svg class="icon" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
-          <h3>Algorithm Agility: Building Cryptographic Infrastructure That Adapts</h3>
-          <p>Cryptographic algorithms have shelf lives. Systems that hardcode a single algorithm are building in future technical debt.</p>
-          <div class="blog-meta">Feb 1, 2026 · 7 min read</div>
-        </a>
+    <div class="blog-content">
+
+      <p>In traditional network security, defense-in-depth is standard practice. Firewalls, intrusion detection, network segmentation, endpoint protection — each layer compensates for potential failures in the others. Yet in cryptographic key management, the industry relies on remarkably thin security models: a single algorithm, a single key lifecycle, a single trust assumption.</p>
+      <p>When that single layer fails, everything fails with it.</p>
+
+      <h2>Why Single-Layer Cryptography Fails</h2>
+      <p>A typical MPC wallet today relies on a single signature algorithm (ECDSA), a single key generation event, and a single assumption — that key shares remain secret. This is the equivalent of protecting a data center with only a firewall and nothing else.</p>
+      <p>Every layer of this stack has been independently breached in production. ECDSA has been exploited through nonce reuse. Key generation has been compromised through supply chain attacks on random number generators. Key share confidentiality has been broken through social engineering, malware, and insider threats.</p>
+      <p>No single layer of cryptographic protection is sufficient. The question is not whether any individual layer will fail, but when. A resilient system assumes every layer will eventually be breached and builds accordingly.</p>
+
+      <h2>Layer 1: Post-Quantum Algorithms</h2>
+      <p>The foundation layer is the choice of signature algorithm. NIST-standardized post-quantum algorithms (ML-DSA, SLH-DSA) provide the mathematical core. Unlike ECDSA, these algorithms resist both classical and quantum attacks. This layer answers: "Can the signature be forged by breaking the mathematics?"</p>
+      <p>Using standardized algorithms is essential. Proprietary or non-standard cryptographic primitives introduce unquantifiable risk. NIST's eight-year evaluation process exists for a reason.</p>
+
+      <h2>Layer 2: Dual-Algorithm Independence</h2>
+      <p>A single post-quantum algorithm may still harbor undiscovered vulnerabilities. Lattice-based cryptography is well-studied but relatively young compared to hash functions. DualSign addresses this by requiring two independent signatures — one lattice-based (ML-DSA) and one hash-based (SLH-DSA) — for every critical operation.</p>
+      <p>Both signatures must be valid for the attestation to pass. An attacker would need to break two fundamentally different mathematical problems simultaneously. This layer answers: "What if one algorithm turns out to be weaker than expected?"</p>
+
+      <h2>Layer 3: Epoch-Based Key Rotation</h2>
+      <p>Even with strong algorithms, a permanent key is a permanent target. Epoch-based rotation ensures signing keys exist only for bounded time windows. Each epoch generates fresh keys derived from the current system state. This layer answers: "How do we limit the damage if a key is stolen?"</p>
+      <p>The blast radius of any key compromise is contained to a single epoch. Past and future epochs remain protected.</p>
+
+      <h2>Layer 4: Deterministic State Evolution</h2>
+      <p>The epoch derivation process must be predictable for auditing yet unpredictable for attackers. Deterministic state evolution ensures that given the same inputs, the same keys are derived — enabling reproducibility and compliance verification. But the state evolves forward-only: knowing the current state does not reveal past states.</p>
+      <p>This layer answers: "Can the key derivation process be audited, tested, and formally verified?"</p>
+
+      <h2>Layer 5: Hardware-Backed Entropy (PCS)</h2>
+      <p>This is the layer that enables Post-Compromise Security. Every key derivation depends on entropy from a hardware-protected source — a Trusted Execution Environment or Secure Enclave — that cannot be extracted by software-level attackers.</p>
+      <p>After a security refresh, the hardware injects new entropy that changes all subsequent derivations. An attacker who captured the complete software state before the refresh cannot predict any operation after it. This layer answers: "Can the system recover after a full compromise?"</p>
+      <p>This is the most critical layer and the one that distinguishes post-compromise-capable systems from everything else on the market.</p>
+
+      <h2>Layer 6: Merkle Key Commitment</h2>
+      <p>Every epoch public key is committed to a Merkle tree before use. The tree root is published and immutable. Each signature carries a Merkle proof authenticating the epoch key against this root.</p>
+      <p>This layer prevents key substitution attacks: an attacker cannot introduce a forged epoch key because it would not have a valid Merkle proof. Verifiers can independently confirm key authenticity without trusting any online service. This layer answers: "How does a verifier know this epoch key is legitimate?"</p>
+
+      <h2>Layer 7: Policy and Quarantine</h2>
+      <p>The final layer enforces operational rules: which operations are permitted, when, under what conditions. If the system detects anomalous behavior, a reboot from an unknown state, or a missed refresh, it enters quarantine mode — signing only diagnostic messages until the integrity of the system is re-established.</p>
+      <p>This layer answers: "What happens when the system suspects it may be compromised but cannot confirm it?"</p>
+
+      <blockquote>Seven layers means seven independent things must fail for security to be breached. In practice, even two simultaneous layer failures is extraordinarily rare.</blockquote>
+
+      <h2>Defense-in-Depth for Cryptography</h2>
+      <p>The seven-layer approach applies the same principle that has proven effective in network security: no single point of failure. Each layer operates independently and compensates for potential weaknesses in the others.</p>
+      <p>An attacker who breaks one algorithm faces the second. An attacker who steals one epoch key faces the rotation boundary. An attacker who compromises the software state faces hardware-backed entropy. An attacker who forges a key faces Merkle commitment verification.</p>
+      <p>This is the architecture that institutional custody requires. Not because any single layer is perfect, but because the combination creates a security posture that is orders of magnitude more resilient than any individual mechanism.</p>
+
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="blog-content">
+      <div style="border-top:1px solid var(--border);padding-top:2rem;margin-top:1rem">
+        <p style="font-size:0.85rem;color:var(--text-muted)">Published by Phoenix Platform Research · Feb 5, 2026</p>
+        <p style="margin-top:1rem"><a href="/blog/" style="color:var(--accent)">← All articles</a></p>
       </div>
     </div>
   </section>
 
-  
   <section class="cta-section">
     <div class="container">
-      <h2 class="fade-up">Stay updated</h2>
-      <p class="fade-up">Subscribe to our newsletter for the latest on post-quantum security.</p>
+      <h2 class="fade-up">See seven layers in action</h2>
+      <p class="fade-up">Phoenix Platform implements all seven layers. Start a free pilot to evaluate the complete stack.</p>
       <div class="cta-buttons fade-up">
-        <a href="mailto:contact@phoenixrise.io?subject=Newsletter%20Subscribe" class="btn btn-primary btn-lg">Subscribe →</a>
-        <a href="/contact.html" class="btn btn-secondary btn-lg">Contact Us →</a>
+        <a href="mailto:contact@phoenixrise.io?subject=Pilot%20Request" class="btn btn-primary btn-lg">Start Free Pilot →</a>
+        <a href="/technology.html" class="btn btn-secondary btn-lg">Explore Technology →</a>
       </div>
     </div>
   </section>
