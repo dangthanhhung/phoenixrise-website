@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#060C16"/>
+      <stop offset="50%" stop-color="#0A1628"/>
+      <stop offset="100%" stop-color="#060C16"/>
+    </linearGradient>
+    <linearGradient id="flame" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8792F"/>
+      <stop offset="100%" stop-color="#F5A623"/>
+    </linearGradient>
+    <linearGradient id="line" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="transparent"/>
+      <stop offset="20%" stop-color="#E8792F" stop-opacity="0.3"/>
+      <stop offset="80%" stop-color="#E8792F" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <!-- Subtle grid -->
+  <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+    <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(255,255,255,0.02)" stroke-width="1"/>
+  </pattern>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <!-- Accent glow -->
+  <circle cx="600" cy="315" r="300" fill="rgba(232,121,47,0.03)"/>
+  <!-- Phoenix flame icon -->
+  <path d="M600 140C588 155 575 160 574 178c-1 15 6 27 18 33 1.5-7.5 0-15 4.5-24 3 9 1.5 18 6 27 4.5-9 3-18 4.5-24C611 199 609.5 208 612 214c12-6 21-18 18-33-3-18-15-27-30-41z" fill="url(#flame)" opacity="0.9"/>
+  <!-- Line separator -->
+  <rect x="100" y="240" width="1000" height="1" fill="url(#line)"/>
+  <!-- Text -->
+  <text x="600" y="310" text-anchor="middle" fill="white" font-family="system-ui,-apple-system,sans-serif" font-size="52" font-weight="800" letter-spacing="-1">PHOENIX PLATFORM</text>
+  <text x="600" y="370" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-family="system-ui,-apple-system,sans-serif" font-size="24" font-weight="400">Cryptographic Infrastructure That Survives Compromise</text>
+  <!-- Bottom tags -->
+  <rect x="340" y="420" width="140" height="36" rx="18" fill="rgba(232,121,47,0.12)" stroke="rgba(232,121,47,0.3)" stroke-width="1"/>
+  <text x="410" y="443" text-anchor="middle" fill="#E8792F" font-family="system-ui,sans-serif" font-size="13" font-weight="700" letter-spacing="1">POST-QUANTUM</text>
+  <rect x="500" y="420" width="200" height="36" rx="18" fill="rgba(76,175,80,0.12)" stroke="rgba(76,175,80,0.3)" stroke-width="1"/>
+  <text x="600" y="443" text-anchor="middle" fill="#4CAF50" font-family="system-ui,sans-serif" font-size="13" font-weight="700" letter-spacing="1">SELF-HEALING KEYS</text>
+  <rect x="720" y="420" width="140" height="36" rx="18" fill="rgba(46,117,182,0.12)" stroke="rgba(46,117,182,0.3)" stroke-width="1"/>
+  <text x="790" y="443" text-anchor="middle" fill="#2E75B6" font-family="system-ui,sans-serif" font-size="13" font-weight="700" letter-spacing="1">MPC + PCS</text>
+  <!-- URL -->
+  <text x="600" y="560" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-family="monospace" font-size="16" letter-spacing="2">phoenixrise.io</text>
+  <!-- Border accent -->
+  <rect x="0" y="0" width="1200" height="4" fill="url(#flame)"/>
+  <rect x="0" y="626" width="1200" height="4" fill="url(#flame)"/>
+</svg>
